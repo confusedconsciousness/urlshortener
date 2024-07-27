@@ -26,7 +26,8 @@ public class Shortener {
     public Response shorten(@NonNull @QueryParam("url") final String url, @QueryParam("alias") final String alias) throws Exception {
         try {
             // allow the user to choose an alias
-            return Response.ok().build();
+            String shortenUrl = urlShortenerEngine.shorten(url, alias);
+            return Response.ok(shortenUrl).build();
         } catch (Exception e) {
             log.error("Unable to shorten your URL: ", e);
             throw e;
