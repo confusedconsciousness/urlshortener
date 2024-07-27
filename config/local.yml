@@ -17,4 +17,4 @@ swagger:
   description: URL shortener
   version: 1.0
 
-baseUrl: www.0xkishan.com
+baseUrl: localhost:9090

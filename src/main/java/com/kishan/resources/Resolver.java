@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.net.URI;
 
-@Path("/resolver")
+@Path("/")
 @Tag(name = "URL Resolver APIs", description = "Use these APIs to resolve short URLs to long URLs")
 @Produces("application/json")
 @Consumes("application/json")
@@ -23,8 +23,8 @@ public class Resolver {
   private final UrlShortenerEngine urlShortenerEngine;
 
   @GET
-  @Path("/")
-  public Response shorten(@NonNull @QueryParam("url") final String url) throws Exception {
+  @Path("/{shortUrl}")
+  public Response shorten(@NonNull @PathParam("shortUrl") final String url) throws Exception {
     try {
       // resolve the urls
       String longUrl = urlShortenerEngine.resolver(url);

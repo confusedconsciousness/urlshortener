@@ -40,8 +40,7 @@ public class UrlShortenerEngine {
 
   public String resolver(String shortUrl) {
     try {
-      String shortKey = shortUrl.split("/")[1];
-      String longUrl = cache.get(shortKey);
+      String longUrl = cache.get(shortUrl);
       if (Strings.isNullOrEmpty(longUrl)) {
         log.error("No such entry present corresponding to {} URL", shortUrl);
         throw new IllegalArgumentException("No such URL exists");
