@@ -20,18 +20,19 @@ import java.net.URI;
 @Slf4j
 public class Resolver {
 
-    private final UrlShortenerEngine urlShortenerEngine;
-    @POST
-    @Path("/")
-    public Response shorten(@NonNull @QueryParam("url") final String url) throws Exception {
-        try {
-            // resolve the urls
-            String longUrl = urlShortenerEngine.resolver(url);
-            return Response.temporaryRedirect(URI.create(longUrl)).status(307).build();
-        } catch (Exception e) {
-            log.error("Unable to shorten your URL: ", e);
-            throw e;
-        }
+  private final UrlShortenerEngine urlShortenerEngine;
 
+  @GET
+  @Path("/")
+  public Response shorten(@NonNull @QueryParam("url") final String url) throws Exception {
+    try {
+      // resolve the urls
+      String longUrl = urlShortenerEngine.resolver(url);
+      return Response.temporaryRedirect(URI.create(longUrl)).status(307).build();
+    } catch (Exception e) {
+      log.error("Unable to shorten your URL: ", e);
+      throw e;
     }
+
+  }
 }

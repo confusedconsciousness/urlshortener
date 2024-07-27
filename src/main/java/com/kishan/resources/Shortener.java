@@ -3,6 +3,7 @@ package com.kishan.resources;
 
 import com.kishan.core.KGS;
 import com.kishan.core.UrlShortenerEngine;
+import io.swagger.v3.core.util.Json;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -27,7 +28,7 @@ public class Shortener {
         try {
             // allow the user to choose an alias
             String shortenUrl = urlShortenerEngine.shorten(url, alias);
-            return Response.ok(shortenUrl).build();
+            return Response.ok(Json.pretty(shortenUrl)).build();
         } catch (Exception e) {
             log.error("Unable to shorten your URL: ", e);
             throw e;
