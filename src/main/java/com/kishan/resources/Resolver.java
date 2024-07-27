@@ -24,7 +24,7 @@ public class Resolver {
 
   @GET
   @Path("/{shortUrl}")
-  public Response shorten(@NonNull @PathParam("shortUrl") final String url) throws Exception {
+  public Response resolve(@NonNull @PathParam("shortUrl") final String url) throws Exception {
     try {
       // resolve the urls
       String longUrl = urlShortenerEngine.resolver(url);
