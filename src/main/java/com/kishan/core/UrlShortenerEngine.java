@@ -19,6 +19,12 @@ public class UrlShortenerEngine {
   private final UrlShortenerConfiguration urlShortenerConfiguration;
   private final Map<String, String> cache = new HashMap<>();
 
+  /**
+   * Takes longUrl and alias (readable short url) and returns the shortened URL
+   * @param longUrl (the original long url that needs to be shortened)
+   * @param alias (human readable short link_
+   * @return shortUrl (string)
+   */
   public String shorten(String longUrl, String alias) {
     if (cache.containsKey(alias)) {
       // this alias is already taken throw error
@@ -38,6 +44,11 @@ public class UrlShortenerEngine {
   }
 
 
+  /**
+   * This finds whether there exists shortUrl, if exists it finds the corresponding long url and redirect it
+   * @param shortUrl: the url provided by the service in exchange of long url
+   * @return long url
+   */
   public String resolver(String shortUrl) {
     try {
       String longUrl = cache.get(shortUrl);
