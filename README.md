@@ -14,3 +14,6 @@ Post that you can run the service using the following command
 ``java -jar target/urlshortener-1.0-SNAPSHOT.jar server config/local.yml``
 
 Now that your application is running, head over to ``localhost:9090/swagger`` and explore the APIs.
+
+
+Dedicated blog to understand what URL shortener is: [UrlShortener Implementation in Java](https://www.0xkishan.com/blogs/designing-and-implementing-a-url-shortener)
