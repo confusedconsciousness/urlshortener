@@ -13,8 +13,6 @@ import java.util.Set;
 
 @Slf4j
 public class KGS {
-
-    Set<String> seen = new HashSet<>();
     private int sequence = 0;
     private static final String BASE62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private final int machineId = 1;
@@ -34,31 +32,15 @@ public class KGS {
     @SneakyThrows
     public String getUniqueKey() {
         // this is done to prevent overflowing
-        // in one millisecond we'll support at max 1000 unique ids.
-        sequence = (sequence + 1) % 1000;
+        // in one millisecond we'll support at max 10000 unique ids.
+        sequence = (sequence + 1) % 10000;
         // inclusion of datacenterId, and machineId will definitely increase the unique key size by 1,
         // but it can now support more than ever keys
 
-        // I think there can be duplicates if the processor is able to process more than 1000 sequence in a millisecond
+        // I think there can be duplicates if the processor is able to process more than 10,000 sequence in a millisecond
         // In that case things will get wrapped up, and we might see duplicates
 
-        // How to avoid that?
-        String uniqueKey = base62(System.currentTimeMillis(), machineId, datacenterId, sequence);
-        if (seen.contains(uniqueKey)) {
-            // clear the set
-            seen.clear();
-            // not optimal solution but we have to rate limit things here itself
-            // wait for 1ms to get unique keys
-            Thread.sleep(1);
-            return getUniqueKey();
-        }
-        try {
-            seen.add(uniqueKey);
-        } catch (Exception e) {
-            // we might end up here if the size of the set has exceeded, in that case simply reset it.
-            seen.clear();
-            Thread.sleep(1);
-        }
-        return uniqueKey;
+        // How to avoid that? That will require us to implement thread safe fixed size hashset, which is out of scope
+        return base62(System.currentTimeMillis(), machineId, datacenterId, sequence);
     }
 }
