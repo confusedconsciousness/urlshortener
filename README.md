@@ -1,8 +1,10 @@
-# urlshortener
+# URLShortener: A Dropwizard Application
+
 A Service to shorten large URLs
 
 To run the service, you need to have Java 17 and Maven installed.
-First, make sure you run
+First, make sure you run. If you are on Windows, installing Maven can be challenging. There are a bunch of tutorials
+provided please refer one of them and then follow the steps.
 
 ``mvn clean install``
 
