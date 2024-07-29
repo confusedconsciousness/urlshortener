@@ -3,7 +3,7 @@ package com.kishan.factory;
 import com.kishan.core.engines.Engine;
 import com.kishan.core.engines.EngineType;
 import com.kishan.core.engines.HashingEngine;
-import com.kishan.core.engines.UniqueKeyGeneratorEngine;
+import com.kishan.core.engines.KeyGeneratorEngine;
 import lombok.SneakyThrows;
 
 import java.security.NoSuchAlgorithmException;
@@ -17,7 +17,7 @@ public class EngineFactory {
                 return new HashingEngine();
             }
             case KEY_GENERATOR -> {
-                return new UniqueKeyGeneratorEngine();
+                return new KeyGeneratorEngine();
             }
             default -> throw new NoSuchAlgorithmException();
 

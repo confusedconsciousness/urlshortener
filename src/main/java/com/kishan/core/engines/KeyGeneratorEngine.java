@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 
 @Slf4j
-public class UniqueKeyGeneratorEngine extends Engine {
+public class KeyGeneratorEngine extends Engine {
     private int sequence = 0;
     private static final String BASE62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private final int machineId = 1;
