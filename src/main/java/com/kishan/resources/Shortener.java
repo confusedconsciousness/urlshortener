@@ -1,7 +1,8 @@
 package com.kishan.resources;
 
 
-import com.kishan.core.UrlShortenerEngine;
+import com.kishan.core.UrlShortener;
+import com.kishan.core.engines.EngineType;
 import io.swagger.v3.core.util.Json;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.inject.Inject;
@@ -19,14 +20,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Shortener {
 
-    private final UrlShortenerEngine urlShortenerEngine;
+    private final UrlShortener urlShortener;
 
     @POST
     @Path("/")
-    public Response shorten(@NonNull @QueryParam("url") final String url, @QueryParam("alias") final String alias) throws Exception {
+    public Response shorten(@NonNull @QueryParam("url") final String url, @QueryParam("alias") final String alias, @QueryParam("type") @DefaultValue("HASHING") final EngineType type) throws Exception {
         try {
             // allow the user to choose an alias
-            String shortenUrl = urlShortenerEngine.shorten(url, alias);
+            String shortenUrl = urlShortener.shorten(url, alias, type);
             return Response.ok(Json.pretty(shortenUrl)).build();
         } catch (Exception e) {
             log.error("Unable to shorten your URL: ", e);

@@ -1,4 +1,4 @@
-package com.kishan.core;
+package com.kishan.core.engines;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 
 @Slf4j
-public class KGS {
+public class UniqueKeyGeneratorEngine extends Engine {
     private int sequence = 0;
     private static final String BASE62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private final int machineId = 1;
@@ -26,8 +26,9 @@ public class KGS {
         return encodedString.reverse().toString();
     }
 
+    @Override
     @SneakyThrows
-    public String getUniqueKey() {
+    public String getUniqueKey(String url) {
         // this is done to prevent overflowing
         // in one millisecond we'll support at max 10000 unique ids.
         sequence = (sequence + 1) % 10000;

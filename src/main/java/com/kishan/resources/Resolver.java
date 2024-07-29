@@ -1,7 +1,7 @@
 package com.kishan.resources;
 
 
-import com.kishan.core.UrlShortenerEngine;
+import com.kishan.core.UrlShortener;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -20,17 +20,16 @@ import java.net.URI;
 @Slf4j
 public class Resolver {
 
-  private final UrlShortenerEngine urlShortenerEngine;
-
+  private final UrlShortener urlShortener;
   @GET
   @Path("/{shortUrl}")
-  public Response resolve(@NonNull @PathParam("shortUrl") final String url) throws Exception {
+  public Response resolve(@NonNull @PathParam("shortUrl") final String shortUrl) throws Exception {
     try {
       // resolve the urls
-      String longUrl = urlShortenerEngine.resolver(url);
+      String longUrl = urlShortener.resolver(shortUrl);
       return Response.temporaryRedirect(URI.create(longUrl)).status(307).build();
     } catch (Exception e) {
-      log.error("Unable to shorten your URL: ", e);
+      log.error("Unable to Resolve your URL: ", e);
       throw e;
     }
 
